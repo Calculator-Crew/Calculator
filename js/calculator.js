@@ -1,10 +1,6 @@
 (function () {
     "use strict";
 
-    // var calculator = {};
-    // calculator.leftOperand = "";
-    // calculator.operator = "";
-    // calculator.rightOperand = "";
     var buttonPressed = "";
 
     var leftOperand = document.getElementById("leftOperand");
@@ -25,9 +21,18 @@
                    break;
 
                case "=":
-                   if(leftOperand.value.length > 0 && rightOperand.value.length > 0 && operator.value.length > 0) {
-                       leftOperand.value = computeCalculation(leftOperand.value, rightOperand.value, operator.value);
-                       operator.value = "";
+                   var leftValue = leftOperand.value;
+                   var rightValue = rightOperand.value;
+                   var operatorValue = operator.value;
+                   if(leftValue.length > 0 && rightValue.length > 0 && operatorValue.length > 0) {
+                       var calculationValue = computeCalculation(leftValue, rightValue, operatorValue);
+
+                       if(calculationValue !== false) {
+                           leftOperand.value = calculationValue;
+                           operator.value = "";
+                       } else {
+                           alert("Sorry, can not divide by 0!");
+                       }
                        rightOperand.value = "";
                    }
                    break;
@@ -46,7 +51,7 @@
     }
 
     function isOperatorBtn (buttonToTest) {
-        return (buttonToTest.className.split(" ").indexOf("operatorBtn") > -1 ? true : false);
+        return (buttonToTest.className.split(" ").indexOf("operatorBtn") > -1);
     }
 
     function computeCalculation(leftOperand, rightOperand, operator) {
@@ -58,7 +63,11 @@
             case "*":
                 return Number(leftOperand) * Number(rightOperand);
             case "/":
-                return Number(leftOperand) / Number(rightOperand);
+                if(rightOperand !== "0") {
+                    return Number(leftOperand) / Number(rightOperand);
+                } else {
+                    return false;
+                }
         }
     }
 })();
