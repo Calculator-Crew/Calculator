@@ -18,7 +18,7 @@
     }
 
     function divide(num1, num2) {
-        if(rightOperand !== 0) {
+        if(num2 !== 0) {
             return num1 / num2;
         } else {
             return false;
@@ -33,10 +33,10 @@
             case "-":
                 return subtract(Number(leftOperand), Number(rightOperand));
 
-            case "*":
+            case "\u00D7":
                 return multiply(Number(leftOperand), Number(rightOperand));
 
-            case "/":
+            case "÷":
                 return divide(Number(leftOperand), Number(rightOperand));
 
         }
@@ -90,13 +90,13 @@
 
                case "%":
                    rightOperand.value = "100";
-                   operator.value = "/";
+                   operator.value = "÷";
                    triggerCalculation(leftOperand, rightOperand, operator);
                    break;
 
                case "+/-":
                    rightOperand.value = "-1";
-                   operator.value = "*";
+                   operator.value = "\u00D7";
                    triggerCalculation(leftOperand, rightOperand, operator);
                    break;
 
